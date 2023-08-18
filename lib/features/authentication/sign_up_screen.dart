@@ -3,12 +3,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/login_screen.dart';
+import 'package:tiktok_clone/features/authentication/username_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
 
-  void onLoginTap(BuildContext context) {
+  void _onLoginTap(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const LoginScreen(),
@@ -16,18 +17,26 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 
+  void _onEmailTap(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const UsernameScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const SafeArea(
+      body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             horizontal: Sizes.size40,
           ),
           child: Column(
             children: [
               Gaps.v80,
-              Text(
+              const Text(
                 'TikTok 가입하기',
                 style: TextStyle(
                   fontSize: Sizes.size24,
@@ -35,7 +44,7 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ),
               Gaps.v20,
-              Text(
+              const Text(
                 '프로필 만들기, 다른 계정 팔로우, 나만의 동영상 제작 등.',
                 style: TextStyle(
                   fontSize: Sizes.size16,
@@ -45,16 +54,19 @@ class SignUpScreen extends StatelessWidget {
               ),
               Gaps.v40,
               AuthButton(
-                icon: FaIcon(FontAwesomeIcons.user),
-                text: '전화 또는 이메일 사용',
+                icon: const FaIcon(FontAwesomeIcons.user),
+                text: '이메일 사용',
+                onTap: _onEmailTap,
               ),
               AuthButton(
-                icon: FaIcon(FontAwesomeIcons.apple),
+                icon: const FaIcon(FontAwesomeIcons.apple),
                 text: 'Apple로 계속 진행',
+                onTap: _onEmailTap,
               ),
               AuthButton(
-                icon: FaIcon(FontAwesomeIcons.google),
+                icon: const FaIcon(FontAwesomeIcons.google),
                 text: 'Google로 계속 진행',
+                onTap: _onEmailTap,
               ),
             ],
           ),
@@ -82,7 +94,7 @@ class SignUpScreen extends StatelessWidget {
                 const Text('이미 계정이 있으신가요?'),
                 Gaps.h5,
                 GestureDetector(
-                  onTap: () => onLoginTap(context),
+                  onTap: () => _onLoginTap(context),
                   child: Text(
                     '로그인',
                     style: TextStyle(
